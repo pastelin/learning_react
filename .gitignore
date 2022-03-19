@@ -1,0 +1,51 @@
+## folders
+**/bin/
+
+## folders
+**/node_modules
+**/.vs
+**/.vscode
+**/dist
+**/.metadata/
+**/.sonarlint/
+**/build/
+**/.settings/
+**/.apt_generated/
+**/target/
+**/classes/
+**/Servers/
+**/RemoteSystemsTempFiles/
+
+
+## archivos
+**/.classpath
+**/.project
+**/.pnp
+**/.pnp.js
+
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# testing
+**/coverage
+
+# misc
+**/.DS_Store
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*

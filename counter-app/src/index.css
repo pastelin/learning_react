@@ -1,0 +1,36 @@
+:root {
+    --primario: #21232a;
+    --blanco: #fff;
+    --secundario: #61dafb;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background: var(--primario);
+    color: var(--blanco);
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    padding: 70px;
+}
+
+button {
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    font-size: 1.6rem;
+    color: var(--blanco);
+    background-color: transparent;
+    border: 2px solid #fff;
+}
+
+button:hover {
+    color: var(--secundario);
+    border: 2px solid var(--secundario);
+}
