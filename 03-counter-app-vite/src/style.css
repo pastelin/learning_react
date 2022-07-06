@@ -1,0 +1,26 @@
+:root {
+    --fuenteDefault: Helvetica, Arial, sans-serif;
+
+    --blanco: #ffffff;
+    --negro1: #21232A;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*:before,
+*a:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--negro1);
+    font-family: var(--fuenteDefault);
+    font-size: 1.6rem;
+    line-height: 2;
+    color: var(--blanco);
+    padding: 7rem;
+}
