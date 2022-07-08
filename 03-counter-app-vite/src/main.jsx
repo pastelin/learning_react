@@ -4,9 +4,10 @@ import {HellowWorldApp} from './HellowWorldApp';
 import {FirstApp} from './FirstApp'
 
 import './style.css';
+import { CounterApp } from './CounterApp';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-        <FirstApp title='Hola, soy Goku!' subtitle={123} />
+        <CounterApp value={10}/>
 	</React.StrictMode>
 );

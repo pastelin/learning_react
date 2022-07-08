@@ -24,3 +24,13 @@ body {
     color: var(--blanco);
     padding: 7rem;
 }
+
+button {
+    background-color: #ffffff;
+    border: none;
+    display: inline-block;
+    padding: 1rem;
+    width: 8rem;
+    border-radius: .5rem;
+    margin: .5rem;
+}
