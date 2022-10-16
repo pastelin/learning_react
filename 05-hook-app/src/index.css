@@ -1,0 +1,69 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+/* Formulario */
+.formulario {
+    width: 50rem;
+    text-align: center;
+    margin: 5rem auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+    padding: 2rem;
+}
+
+.formulario .campo {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    font-size: 1.6rem;
+    height: 4rem;
+    border-radius: .5rem;
+}
+
+hr {
+    margin-bottom: 2rem;
+}
+
+/* 03-examples */
+.message-loading {
+    width: 80%;
+    margin: auto;
+    background-color: aqua;
+    text-align: center;
+    border-radius: .5rem;
+}
+
+.message-loading span {
+    padding: 1rem;
+    font-size: 3rem;
+    display: inline-block;
+    
+}
