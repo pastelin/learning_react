@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import { todoReducer } from '../08-useReducer/todoReducer';
 
-// Funcion que inicializa el estado de todos almacenados en el localStorage
+// Funcion que inicializa el estado de todos almacenados en localStorage
 const init = () => {
     return JSON.parse(localStorage.getItem('todos')) || [];
 };

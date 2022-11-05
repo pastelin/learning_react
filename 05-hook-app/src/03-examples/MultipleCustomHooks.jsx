@@ -14,13 +14,11 @@ export const MultipleCustomHooks = () => {
 			<h1>BreakingBad Quotes</h1>
 			<hr />
 
-			{
-                isLoading 
-                    ? <LoadingQuote /> 
-                    : <Quote author={author} quote={quote} />
-            }
+			{isLoading ? <LoadingQuote /> : <Quote author={author} quote={quote} />}
 
-			<button onClick={() => increment()}>Next quote</button>
+			<button disabled={isLoading} onClick={() => increment()}>
+				Next quote
+			</button>
 		</>
 	);
 };
