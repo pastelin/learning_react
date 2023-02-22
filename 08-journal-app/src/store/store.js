@@ -1,0 +1,9 @@
+import { configureStore } from '@reduxjs/toolkit';
+import { authSlice } from './auth';
+
+// Configuracion para registar los Slices creados y que se compartiran a todos los componentes definidos
+export const store = configureStore({
+    reducer: {
+        auth: authSlice.reducer,
+    },
+});

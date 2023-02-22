@@ -4,6 +4,7 @@ import { types } from '../types/types';
 import { AuthContext } from './AuthContext'
 import { authReducer } from './authReducer';
 
+// Definicion del estado inicial para el reducer
 const init = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -23,10 +24,13 @@ export const AuthProvider = ({children}) => {
 
         const user = { id: 'ABC', name };
 
+        // Accion que sera ejecutada para regresar un estado nuevo
         const action = { type: types.login, payload: user };
 
+        // Almacena la informacion del usuario logueado
         localStorage.setItem('user', JSON.stringify(user));
 
+        // Ejecuta la accion en el reducer
         dispatch(action);
     }
 

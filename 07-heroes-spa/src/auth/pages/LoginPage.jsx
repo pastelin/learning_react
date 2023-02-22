@@ -4,7 +4,9 @@ import { AuthContext } from '../context/AuthContext';
 
 export const LoginPage = () => {
 	// Custom hook para acceder a las funciones de Navigation.Provider
-	const navigate = useNavigate();
+    const navigate = useNavigate();
+    
+    // Obtiene la referencia de la funcion login() definida en <AuthProvider>
 	const {login} = useContext(AuthContext);
 
 
