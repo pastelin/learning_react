@@ -8,7 +8,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
 	// Hook que valida cada campo de formState y se ejecuta cada este mismo cambie de estado
 	useEffect(() => {
 		createValidators();
-	}, [formState]);
+    }, [formState]);
+    
+    useEffect(() => {
+        setFormState(initialForm);
+    }, [initialForm])
 
 	// Hook que se encarga de validar si hay mensajes de errore indicandolo mediante un boleano
 	// Regresa false si hubo un errror caso contrario regresa true

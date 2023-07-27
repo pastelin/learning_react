@@ -6,6 +6,7 @@ import {
 	registerUserWithEmailPassword,
 	signInWithGoogle,
 } from '../../firebase/providers';
+import { clearNotesLogout } from '../journal';
 
 // thunks se usa para ejecutar funciones asincronas
 
@@ -45,13 +46,13 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
 
 export const startLoginWithEmailPassword = ({ email, password }) => {
 	return async (dispatch) => {
-		dispatch(checkingCredentials);
+		dispatch(checkingCredentials());
 
-        const { ok, uid, photoURL, displayName, errorMessage } = await loginWithEmailPassword({ email, password });
+        const result = await loginWithEmailPassword({ email, password });
         
-        if (!ok) return dispatch(logout({ errorMessage }));
+        if (!result.ok) return dispatch(logout({ errorMessage }));
         
-        dispatch(login({ uid, email, photoURL, displayName }));
+        dispatch(login(result));
 	};
 };
 
@@ -59,6 +60,7 @@ export const startLogout = () => {
     return async (dispatch) => {
         await logoutFirebase();
 
+        dispatch(clearNotesLogout());
         dispatch(logout());
     }
 }

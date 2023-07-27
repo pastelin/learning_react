@@ -13,11 +13,13 @@ import {
 	Typography,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { SideBarItem } from './SideBarItem';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+	// A hook to access the redux store's state.
+	const { displayName } = useSelector((state) => state.auth);
+	const { notes } = useSelector((state) => state.journal);
 
-    const { displayName } = useSelector( state => state.auth);
-    
 	return (
 		<Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
 			<Drawer
@@ -37,18 +39,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 				<Divider />
 
 				<List>
-					{['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'].map((text) => (
-						<ListItem key={text} disablePadding>
-							<ListItemButton>
-								<ListItemIcon>
-									<TurnedInNot />
-								</ListItemIcon>
-								<Grid container>
-									<ListItemText primary={text} />
-									<ListItemText secondary={'lfasdfasdfasdfasfasdfasdf'} />
-								</Grid>
-							</ListItemButton>
-						</ListItem>
+					{notes.map((note) => (
+						<SideBarItem key={note.id} {...note} />
 					))}
 				</List>
 			</Drawer>
