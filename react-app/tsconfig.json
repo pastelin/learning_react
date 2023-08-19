@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../12-react-app/src/routes/Navigation copy.tsx"  ]
 }
