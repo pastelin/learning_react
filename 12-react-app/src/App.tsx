@@ -1,9 +1,9 @@
-import { NavigationCP } from './routes/NavigationCP';
+import { NavigationSI } from './routes/NavigationSI';
 
 function App() {
   return (
       <>
-        <NavigationCP />
+        <NavigationSI />
       </>
     );
 }
