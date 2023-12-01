@@ -1,7 +1,7 @@
 {
 	"name": "jp-custom-components",
 	"private": false,
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
@@ -44,7 +44,6 @@
 		"push:npm": "np",
 		"test": "echo 'all tests were good'"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@storybook/addon-essentials": "^7.5.3",
 		"@storybook/addon-interactions": "^7.5.3",
