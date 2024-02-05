@@ -1,0 +1,196 @@
+body {
+	box-sizing: border-box;
+	margin: 0;
+}
+ 
+body,
+input,
+button {
+	/* 
+        * 12 = tamaño de letra más pequeño
+        * 16 = tamaño de letra más grande
+        * 300 = tamaño de viewport más pequeño
+        * 1200 = tamaño de viewport más grande
+    */
+	font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1200 - 300)));
+	font-family: 'Montserrat', sans-serif;
+}
+
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+
+.title {
+	margin-top: 0;
+	margin-bottom: 25px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+/* 
+    * Clases utilitarias 
+*/
+.shadow {
+	box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgba(0, 0, 0, 0.15);
+}
+
+.p-2 {
+	padding: 2rem;
+}
+
+.flex-responsive {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 2rem;
+}
+
+.flex-responsive-item {
+	/* 
+        1. Factor de crecimiento, sobrante en pixeles entre el número de piezas totales
+        2. Factor de reducción, valor de contenedero reducido entre el número de piezas totales
+        3. Tamaño mínimo que tendrá cada columna
+    */
+	flex: 1 1 300px;
+}
+
+.mt-3 {
+	margin-top: 3rem;
+}
+
+.text-end {
+	text-align: end;
+}
+
+.w-50 {
+	width: 50%;
+}
+
+.container {
+	max-width: 80%;
+	min-width: 300px;
+	margin-inline: auto;
+}
+
+.list-group {
+	border: thin solid rgba(0, 0, 0, 0.4);
+	padding: 0;
+	border-radius: 10px;
+}
+
+.list-group > li {
+	list-style: none;
+	padding: 10px;
+	border-bottom: thin solid rgba(0, 0, 0, 0.4);
+}
+
+.list-group > li:last-child {
+	border-bottom: none;
+}
+
+.table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+.table th,
+.table td {
+	padding: 10px;
+}
+
+.table > tbody > tr:nth-child(odd) {
+	background-color: #ddd;
+}
+
+.table > tbody > tr:hover {
+	background-color: #dde;
+}
+
+.active {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.text-total > span {
+	margin-block: 1.5rem;
+	display: inline-block;
+	background-color: green;
+	color: rgb(255, 255, 255);
+	font-weight: 900;
+	padding: 0.5rem 1rem;
+	border-radius: 1rem;
+}
+
+/*
+    * Estilos para el formulario 
+*/
+
+.form-items {
+	text-align: center;
+}
+
+.form-items > input {
+	display: inline-block;
+	width: 100%;
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-bottom: 0.5rem;
+	border: thin solid rgba(0, 0, 0, 0.55);
+	outline: none;
+}
+
+.form-items > input:focus {
+	border: thick solid rgba(0, 0, 0, 0.3);
+}
+
+/* 
+    * Estilos para los botones
+*/
+
+.btn {
+	display: block;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.btn-submit,
+.btn-togle-form {
+	margin-block: 1rem;
+	width: 15vw;
+	min-width: 150px;
+	color: white;
+	background-color: rgba(104, 167, 236);
+	transition: background-color 0.3s ease-in-out;
+}
+
+.btn-delete {
+	background-color: rgb(205, 92, 92);
+	color: white;
+}
+
+.btn-togle-form {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-submit:hover {
+	box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgba(104, 167, 236, 0.6);
+	background-color: white;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-togle-form:hover {
+	box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgba(0, 0, 0, 0.3);
+	background-color: white;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-delete:hover {
+	box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgb(205, 92, 92, 0.5);
+	background-color: white;
+	color: rgb(205, 92, 92);
+}

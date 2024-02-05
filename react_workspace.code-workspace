@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../cursos-jhonmircha"
+		},
+		{
+			"path": "../../proyectos/React/sgah-app"
+		}
+	],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "cursos-jhonmircha"
+    }
+}
