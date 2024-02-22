@@ -1,0 +1,267 @@
+body {
+	box-sizing: border-box;
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+}
+
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+
+body {
+	/* 
+        * 12 = tamaño de letra más pequeño
+        * 16 = tamaño de letra más grande
+        * 300 = tamaño de viewport más pequeño
+        * 1200 = tamaño de viewport más grande
+    */
+	font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1200 - 300)));
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 
+    * Clases utilitarias 
+*/
+
+.mt-2 {
+	margin-top: 2rem;
+}
+
+.my-2 {
+	margin-block: 2rem;
+}
+
+.mr-2 {
+	margin-right: 2rem;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-sb {
+	justify-content: space-between;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.flex-responsive {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 2rem;
+}
+
+.flex-responsive-item {
+	/* 
+        1. Factor de crecimiento, sobrante en pixeles entre el número de piezas totales
+        2. Factor de reducción, valor de contenedor reducido entre el número de piezas totales
+        3. Tamaño mínimo que tendrá cada columna
+    */
+	flex: 1 1 300px;
+}
+
+/* 
+    * Clases de componentes
+*/
+.container {
+	max-width: 80vw;
+	min-width: 300px;
+	margin-inline: auto;
+}
+
+/* 
+    * Estilos para tablas
+*/
+
+.table {
+	width: 90%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > td {
+	padding: 0.5rem;
+}
+
+.table > tbody > tr:nth-child(odd) {
+	background-color: rgb(229, 230, 228);
+}
+
+/* 
+    * Estilos para botones
+*/
+
+.btn {
+	display: inline-block;
+	border-radius: 0.5rem;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	color: white;
+    font-size: calc(10px + (14 - 10) * ((100vw - 300px) / (1200 - 300)));
+}
+
+.btn-blue-sm {
+	padding: 0.3rem;
+	background-color: rgba(94, 144, 224, 1);
+}
+
+.btn-blue-md {
+	padding: 0.5rem 3rem;
+	background-color: rgba(94, 144, 224, 1);
+}
+
+.btn-blue-sm:hover,
+.btn-blue-md:hover,
+.btn-red:hover {
+	opacity: 0.7;
+}
+
+.btn-red {
+	padding: 0.3rem;
+	background-color: rgba(170, 0, 0, 1);
+}
+
+.btn-outline-red {
+	padding: 0.5rem;
+	border: 2px solid rgba(170, 0, 0, 1);
+	color: white;
+	background-color: transparent;
+}
+
+.btn-outline-red:hover {
+	background-color: rgba(170, 0, 0, 1);
+	opacity: 0.9;
+}
+
+/* 
+    * Estilos para formulario
+*/
+.form-container > input {
+	width: 70%;
+	padding: 0.7rem;
+	border-radius: 1rem;
+	margin-bottom: 0.5rem;
+	border: thin solid rgba(0, 0, 0, 0.55);
+	outline: none;
+}
+
+.form-container > input:focus {
+	border: thick solid rgba(0, 0, 0, 0.3);
+	padding: calc(0.7rem - 4px);
+}
+
+/* 
+    * Estilos para alertas
+*/
+
+.alert {
+	padding: 2rem;
+	border-radius: 0.5rem;
+	text-align: center;
+}
+
+.alert-warning {
+	background-color: rgba(234, 164, 72, 0.6);
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: bold;
+}
+
+/* 
+    * Estilps para overlay
+*/
+
+.overlay {
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 997;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.overlay-container {
+	background-color: white;
+	width: 40vw;
+	min-width: 400px;
+	text-align: center;
+	border-radius: 1rem;
+}
+
+.overlay-container > h5 {
+	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1200 - 300)));
+	opacity: 0.8;
+}
+
+.animacion {
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+}
+
+.fadeIn {
+	animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/* 
+    * Estilos para Login
+*/
+.modal-container {
+	width: 40vw;
+	text-align: center;
+	box-shadow: 0.25rem 0.25rem 0.5rem 0.25rem rgba(0, 0, 0, 0.3);
+	border-radius: 1rem;
+	margin-top: 2rem;
+}
+
+/* 
+    * Estilos pa Navbar
+*/
+
+.nav {
+	padding: 0.5rem 1rem;
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+}
+
+.nav > div a {
+	color: white;
+	margin-right: 1rem;
+}
+
+a:hover {
+	opacity: 0.7;
+}
