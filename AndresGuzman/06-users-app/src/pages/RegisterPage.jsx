@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserForm } from '../components/UserForm';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
-export const RegisterPage = ({ users = [], handlerAddUser, initialUserForm }) => {
+export const RegisterPage = () => {
+	const { users = [], initialUserForm } = useContext(UserContext);
 	const [userSelected, setUserSelecter] = useState(initialUserForm);
 
 	// Hook que obtiene el valor del id pasado como query param
@@ -21,11 +23,7 @@ export const RegisterPage = ({ users = [], handlerAddUser, initialUserForm }) =>
 			<div className=" flex-responsive justify-center">
 				<div className="overlay-container">
 					<h5>{userSelected.id > 0 ? 'Editar' : 'Registrar'} Usuario</h5>
-					<UserForm
-						userSelected={userSelected}
-						handlerAddUser={handlerAddUser}
-						initialUserForm={initialUserForm}
-					/>
+					<UserForm userSelected={userSelected} />
 				</div>
 			</div>
 		</>
