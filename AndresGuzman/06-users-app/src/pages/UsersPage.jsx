@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
-import { UserModalForm } from "../components/UserModalForm";
-import { UsersList } from "../components/UsersList";
-import { UserContext } from "../context/UserContext";
+import { useContext } from 'react';
+import { UserModalForm } from '../components/UserModalForm';
+import { UsersList } from '../components/UsersList';
+import { UserContext } from '../context/UserContext';
 
 export const UsersPage = () => {
     const {

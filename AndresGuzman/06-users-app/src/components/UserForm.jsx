@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import { useContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 export const UserForm = ({ userSelected, handlerCloseForm }) => {
     const { handlerAddUser, initialUserForm } = useContext(UserContext);
@@ -11,7 +11,7 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setUserForm({ ...userSelected, password: "" });
+        setUserForm({ ...userSelected, password: '' });
     }, [userSelected]);
 
     const onInputChange = ({ target: { name, value } }) => {
@@ -26,25 +26,25 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
 
         if (!username || (!password && id === 0) || !email) {
             Swal.fire(
-                "Error de validacion",
-                "Debe completar los campos del formulario",
-                "error"
+                'Error de validacion',
+                'Debe completar los campos del formulario',
+                'error'
             );
             return;
         }
 
-        if (!email.includes("@")) {
+        if (!email.includes('@')) {
             Swal.fire(
-                "Error de validacion email",
-                "El email debe ser válido",
-                "error"
+                'Error de validacion email',
+                'El email debe ser válido',
+                'error'
             );
             return;
         }
 
         handlerAddUser(userForm);
         setUserForm(initialUserForm);
-        navigate("/users");
+        navigate('/users');
     };
 
     const onCloseForm = () => {
@@ -83,7 +83,7 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                 <input type="hidden" value={id} />
                 <div>
                     <button className="btn btn-blue-md mr-2" type="submit">
-                        {id > 0 ? "Editar" : "Crear"}
+                        {id > 0 ? 'Editar' : 'Crear'}
                     </button>
 
                     {!handlerCloseForm || (
