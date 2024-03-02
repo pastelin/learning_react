@@ -11,9 +11,13 @@
 		},
 		{
 			"path": "../learning_java/AndresGuzman/learning_spring/11-backend-cartapp"
+		},
+		{
+			"path": "../learning_java/AndresGuzman/learning_spring/12-backend-userapp"
 		}
 	],
     "settings": {
-        "liveServer.settings.multiRootWorkspaceName": "cursos-jhonmircha"
+		"liveServer.settings.multiRootWorkspaceName": "cursos-jhonmircha",
+		"java.configuration.updateBuildConfiguration": "interactive"
     }
 }
