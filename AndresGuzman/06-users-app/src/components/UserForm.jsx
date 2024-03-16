@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 
 export const UserForm = ({ userSelected, handlerCloseForm }) => {
-    const { handlerAddUser, initialUserForm } = useContext(UserContext);
+    const { handlerAddUser, initialUserForm, errors } = useContext(UserContext);
     const [userForm, setUserForm] = useState(initialUserForm);
     const { id, username, email, password } = userForm;
     const navigate = useNavigate();
@@ -24,26 +23,7 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!username || (!password && id === 0) || !email) {
-            Swal.fire(
-                'Error de validacion',
-                'Debe completar los campos del formulario',
-                'error'
-            );
-            return;
-        }
-
-        if (!email.includes('@')) {
-            Swal.fire(
-                'Error de validacion email',
-                'El email debe ser válido',
-                'error'
-            );
-            return;
-        }
-
         handlerAddUser(userForm);
-        setUserForm(initialUserForm);
         navigate('/users');
     };
 
@@ -53,8 +33,8 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
     };
 
     return (
-        <>
-            <form className="form-container" onSubmit={onSubmit}>
+        <form className="form-container" onSubmit={onSubmit}>
+            <div className="input-group flex-column-responsive align-center">
                 <input
                     type="text"
                     placeholder="Username"
@@ -62,7 +42,10 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                     value={username}
                     onChange={onInputChange}
                 />
+                <span className="text-danger">{errors?.username}</span>
+            </div>
 
+            <div className="input-group flex-column-responsive align-center">
                 {id > 0 || (
                     <input
                         type="password"
@@ -72,7 +55,10 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                         onChange={onInputChange}
                     />
                 )}
+                <span className="text-danger">{errors?.password}</span>
+            </div>
 
+            <div className="input-group flex-column-responsive align-center">
                 <input
                     type="text"
                     placeholder="Email"
@@ -80,23 +66,25 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                     value={email}
                     onChange={onInputChange}
                 />
-                <input type="hidden" value={id} />
-                <div>
-                    <button className="btn btn-blue-md mr-2" type="submit">
-                        {id > 0 ? 'Editar' : 'Crear'}
-                    </button>
+                <span className="text-danger">{errors?.email}</span>
+            </div>
 
-                    {!handlerCloseForm || (
-                        <button
-                            className="btn btn-blue-md my-2"
-                            type="button"
-                            onClick={onCloseForm}
-                        >
-                            Cerrar
-                        </button>
-                    )}
-                </div>
-            </form>
-        </>
+            <input type="hidden" value={id} />
+            <div>
+                <button className="btn btn-blue-md mr-2" type="submit">
+                    {id > 0 ? 'Editar' : 'Crear'}
+                </button>
+
+                {!handlerCloseForm || (
+                    <button
+                        className="btn btn-blue-md my-2"
+                        type="button"
+                        onClick={onCloseForm}
+                    >
+                        Cerrar
+                    </button>
+                )}
+            </div>
+        </form>
     );
 };

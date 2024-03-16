@@ -12,10 +12,17 @@ const initialUserForm = {
     email: '',
 };
 
+const initialErrors = {
+    username: '',
+    password: '',
+    email: '',
+};
+
 export const useUsers = () => {
     const [users, dispatch] = useReducer(usersReducer, initialsUsers);
     const [userSelected, setUserSelected] = useState(initialUserForm);
     const [visibleForm, setVisibleForm] = useState(false);
+    const [errors, setErrors] = useState(initialErrors);
 
     const getUsers = async () => {
         const result = await findAll();
@@ -28,25 +35,46 @@ export const useUsers = () => {
     const handlerAddUser = async (user) => {
         let response;
 
-        if (user.id === 0) {
-            response = await save(user);
-        } else {
-			response = await update(user);
-		}
+        try {
+            if (user.id === 0) {
+                response = await save(user);
+            } else {
+                response = await update(user);
+            }
 
-        dispatch({
-            type: user.id === 0 ? 'addUser' : 'updateUser',
-            payload: response.data,
-        });
+            dispatch({
+                type: user.id === 0 ? 'addUser' : 'updateUser',
+                payload: response.data,
+            });
 
-        Swal.fire(
-            user.id === 0 ? 'Usuario Creado' : 'Usuario Actualiza',
-            user.id === 0
-                ? 'El usuario ha sido creado con exito!'
-                : 'El usuario ha sido actualizado con exito!',
-            'success'
-        );
-        handlerCloseForm();
+            Swal.fire(
+                user.id === 0 ? 'Usuario Creado' : 'Usuario Actualiza',
+                user.id === 0
+                    ? 'El usuario ha sido creado con exito!'
+                    : 'El usuario ha sido actualizado con exito!',
+                'success'
+            );
+            handlerCloseForm();
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setErrors(error.response.data);
+                console.error(errors);
+            } else if (
+                error.response &&
+                error.response.status === 500 &&
+                error.response.data?.message?.includes('constraint')
+            ) {
+                if (error.response.data?.message?.includes('UK_username')) {
+                    setErrors({ username: 'El username ya existe' });
+                }
+
+                if (error.response.data?.message?.includes('UK_email')) {
+                    setErrors({ username: 'El email ya existe' });
+                }
+            } else {
+                throw error;
+            }
+        }
     };
 
     const handlerRemoveUser = (id) => {
@@ -60,7 +88,7 @@ export const useUsers = () => {
             confirmButtonText: 'Si, eliminar!',
         }).then((result) => {
             if (result.isConfirmed) {
-				remove(id);
+                remove(id);
                 dispatch({
                     type: 'removeUser',
                     payload: id,
@@ -86,6 +114,7 @@ export const useUsers = () => {
     const handlerCloseForm = () => {
         setVisibleForm(false);
         setUserSelected(initialUserForm);
+        setErrors({});
     };
 
     return {
@@ -93,6 +122,7 @@ export const useUsers = () => {
         userSelected,
         initialUserForm,
         visibleForm,
+        errors,
         handlerAddUser,
         handlerUserSelectedForm,
         handlerRemoveUser,
