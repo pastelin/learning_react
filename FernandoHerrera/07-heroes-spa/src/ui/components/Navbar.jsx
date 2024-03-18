@@ -7,7 +7,7 @@ export const Navbar = () => {
 	// custom hook para obtener las funciones de Navigation.Provider
 	const navigate = useNavigate();
 	
-	const {user, logout} = useAuth();
+	const {user, logout} = useContext(AuthContext());
 	const onLogout = () => {
 		logout();
 		navigate('/login', {

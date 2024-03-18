@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from './context/userContext';
 
 export const HomePage = () => {
-	const { user, setUser } = useUsers();
+	const { user, setUser } = useContext(UserContext());
 
 	return (
 		<>
