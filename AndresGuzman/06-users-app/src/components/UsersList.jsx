@@ -1,9 +1,10 @@
-import { useContext } from 'react';
 import { UserRow } from './UserRow';
-import { UserContext } from '../context/UserContext';
+import { useUsers } from '../hooks/useUsers';
+import { useAuth } from '../auth/hooks/useAuth';
 
 export const UsersList = () => {
-    const { users } = useContext(UserContext);
+    const { users } = useUsers();
+    const { login } = useAuth();
 
     return (
         <table className="table mt-2">
@@ -12,18 +13,23 @@ export const UsersList = () => {
                     <th>#</th>
                     <th>username</th>
                     <th>email</th>
-                    <th>update</th>
-                    <th>update route</th>
-                    <th>remove</th>
+                    {!login.isAdmin || (
+                        <>
+                            <th>update</th>
+                            <th>update route</th>
+                            <th>remove</th>
+                        </>
+                    )}
                 </tr>
             </thead>
             <tbody>
-                {users.map(({ id, username, email }) => (
+                {users.map(({ id, username, email, admin }) => (
                     <UserRow
                         key={id}
                         id={id}
                         username={username}
                         email={email}
+                        admin={admin}
                     />
                 ))}
             </tbody>
