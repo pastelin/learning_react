@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { UserModalForm } from '../components/UserModalForm';
 import { UsersList } from '../components/UsersList';
-import { UserContext } from '../context/UserContext';
+import { useUsers } from '../hooks/useUsers';
+import { useAuth } from '../auth/hooks/useAuth';
 
 export const UsersPage = () => {
-    const { users, visibleForm, handlerOpenForm, getUsers } =
-        useContext(UserContext);
+    const { users, visibleForm, handlerOpenForm, getUsers } = useUsers();
+
+    const { login } = useAuth();
 
     useEffect(() => {
         getUsers();
@@ -20,7 +22,7 @@ export const UsersPage = () => {
 
                 <div className="flex-responsive">
                     <div className="flex-responsive-item">
-                        {visibleForm || (
+                        {visibleForm || !login.isAdmin || (
                             <button
                                 className="btn btn-blue-md"
                                 onClick={handlerOpenForm}

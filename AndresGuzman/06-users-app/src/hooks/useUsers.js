@@ -1,51 +1,51 @@
-import { useReducer, useState } from 'react';
-import { usersReducer } from '../reducers/usersReducer';
 import Swal from 'sweetalert2';
 import { findAll, remove, save, update } from '../services/userService';
-
-const initialsUsers = [];
-
-const initialUserForm = {
-    id: 0,
-    username: '',
-    password: '',
-    email: '',
-};
-
-const initialErrors = {
-    username: '',
-    password: '',
-    email: '',
-};
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    addUser,
+    initialUserForm,
+    loadingError,
+    loadingUsers,
+    onCloseForm,
+    onOpenForm,
+    onUserSelected,
+    removeUser,
+    updateUser,
+} from '../store/slices/users/usersSlice';
+import { useAuth } from '../auth/hooks/useAuth';
 
 export const useUsers = () => {
-    const [users, dispatch] = useReducer(usersReducer, initialsUsers);
-    const [userSelected, setUserSelected] = useState(initialUserForm);
-    const [visibleForm, setVisibleForm] = useState(false);
-    const [errors, setErrors] = useState(initialErrors);
+    const { users, userSelected, visibleForm, errors } = useSelector(
+        (state) => state.users
+    );
+    const dispatch = useDispatch();
+
+    const { login, handlerLogout } = useAuth();
 
     const getUsers = async () => {
-        const result = await findAll();
-        dispatch({
-            type: 'loadingUsers',
-            payload: result.data,
-        });
+        try {
+            const result = await findAll();
+            dispatch(loadingUsers(result.data));
+        } catch (error) {
+            if (error.response?.status == 401) {
+                handlerLogout();
+            }
+        }
     };
 
     const handlerAddUser = async (user) => {
+        if (!login.isAdmin) return;
+
         let response;
 
         try {
             if (user.id === 0) {
                 response = await save(user);
+                dispatch(addUser({ ...response.data }));
             } else {
                 response = await update(user);
+                dispatch(updateUser({ ...response.data }));
             }
-
-            dispatch({
-                type: user.id === 0 ? 'addUser' : 'updateUser',
-                payload: response.data,
-            });
 
             Swal.fire(
                 user.id === 0 ? 'Usuario Creado' : 'Usuario Actualiza',
@@ -57,7 +57,7 @@ export const useUsers = () => {
             handlerCloseForm();
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                setErrors(error.response.data);
+                dispatch(loadingError(error.response.data));
                 console.error(errors);
             } else if (
                 error.response &&
@@ -65,12 +65,16 @@ export const useUsers = () => {
                 error.response.data?.message?.includes('constraint')
             ) {
                 if (error.response.data?.message?.includes('UK_username')) {
-                    setErrors({ username: 'El username ya existe' });
+                    dispatch(
+                        loadingError({ username: 'El username ya existe' })
+                    );
                 }
 
                 if (error.response.data?.message?.includes('UK_email')) {
-                    setErrors({ username: 'El email ya existe' });
+                    dispatch(loadingError({ username: 'El email ya existe' }));
                 }
+            } else if (error.response?.status == 401) {
+                handlerLogout();
             } else {
                 throw error;
             }
@@ -78,6 +82,8 @@ export const useUsers = () => {
     };
 
     const handlerRemoveUser = (id) => {
+        if (!login.isAdmin) return;
+
         Swal.fire({
             title: 'Esta seguro que desea eliminar?',
             text: 'Cuidado el usuario sera eliminado!',
@@ -86,35 +92,36 @@ export const useUsers = () => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, eliminar!',
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                remove(id);
-                dispatch({
-                    type: 'removeUser',
-                    payload: id,
-                });
-                Swal.fire({
-                    title: 'Usuario Eliminado!',
-                    text: 'El usuario ha sido eliminado con exito!',
-                    icon: 'success',
-                });
+                try {
+                    await remove(id);
+                    dispatch(removeUser(id));
+                    Swal.fire({
+                        title: 'Usuario Eliminado!',
+                        text: 'El usuario ha sido eliminado con exito!',
+                        icon: 'success',
+                    });
+                } catch (error) {
+                    if (error.response?.status == 401) {
+                        handlerLogout();
+                    }
+                }
             }
         });
     };
 
     const handlerUserSelectedForm = (user) => {
-        setUserSelected({ ...user });
-        setVisibleForm(true);
+        dispatch(onUserSelected({ ...user }));
     };
 
     const handlerOpenForm = () => {
-        setVisibleForm(true);
+        dispatch(onOpenForm());
     };
 
     const handlerCloseForm = () => {
-        setVisibleForm(false);
-        setUserSelected(initialUserForm);
-        setErrors({});
+        dispatch(onCloseForm());
+        dispatch(loadingError({}));
     };
 
     return {

@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { useUsers } from '../hooks/useUsers';
 
 export const UserForm = ({ userSelected, handlerCloseForm }) => {
-    const { handlerAddUser, initialUserForm, errors } = useContext(UserContext);
+    const { handlerAddUser, initialUserForm, errors } = useUsers();
     const [userForm, setUserForm] = useState(initialUserForm);
-    const { id, username, email, password } = userForm;
+    const [checked, setChecked] = useState(userForm.admin);
+    const { id, username, email, password, admin } = userForm;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,6 +18,14 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
         setUserForm({
             ...userForm,
             [name]: value,
+        });
+    };
+
+    const onCheckboxChange = () => {
+        setChecked(!checked);
+        setUserForm({
+            ...userForm,
+            admin: checked,
         });
     };
 
@@ -67,6 +76,16 @@ export const UserForm = ({ userSelected, handlerCloseForm }) => {
                     onChange={onInputChange}
                 />
                 <span className="text-danger">{errors?.email}</span>
+            </div>
+
+            <div className="input-group flex-row-responsive">
+                <input
+                    type="checkbox"
+                    name="admin"
+                    checked={admin}
+                    onChange={onCheckboxChange}
+                />
+                <label htmlFor="admin">Admin</label>
             </div>
 
             <input type="hidden" value={id} />

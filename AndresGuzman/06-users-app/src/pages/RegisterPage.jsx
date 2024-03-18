@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserForm } from '../components/UserForm';
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { useUsers } from '../hooks/useUsers';
 
 export const RegisterPage = () => {
-    const { users = [], initialUserForm } = useContext(UserContext);
+    const { users = [], initialUserForm } = useUsers();
     const [userSelected, setUserSelecter] = useState(initialUserForm);
 
     // Hook que obtiene el valor del id pasado como query param

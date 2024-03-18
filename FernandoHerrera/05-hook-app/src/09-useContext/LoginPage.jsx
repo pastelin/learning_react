@@ -3,7 +3,7 @@ import { UserContext } from './context/userContext';
 
 export const LoginPage = () => {
 	// Regresa el value del componente UserProvider
-	const { user, setUser } = useContext(UserContext);
+	const { user, setUser } = useUsers();
 
 	return (
 		<>

@@ -37,7 +37,7 @@ describe('Pruebas en <Navbar />', () => {
 			<MemoryRouter initialEntries={['/marvel']}>
 				{/*
 				 * value={} : envia la informacion que el componente <Navbar /> recibe de la siguiente manera:
-				 * const {user, logout} = useContext(AuthContext);
+				 * const {user, logout} = useAuth();
 				 */}
 				<AuthContext.Provider value={contextValue}>
 					<Navbar />

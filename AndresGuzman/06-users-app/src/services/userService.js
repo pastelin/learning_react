@@ -1,43 +1,23 @@
-import axios from 'axios';
+import usersApi from '../apis/usersApi';
 
-const BASE_URL = 'http://localhost:8081/users';
+const BASE_URL = '';
 
 export const findAll = async () => {
-    try {
-        const response = await axios.get(BASE_URL);
-        return response;
-    } catch (error) {
-        console.error(error);
-    }
-
-    return null;
+    return await usersApi.get(BASE_URL);
 };
 
-export const save = async ({ username, email, password }) => {
-    try {
-        return await axios.post(BASE_URL, { username, email, password });
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+export const save = async ({ username, email, password, admin }) => {
+    return await usersApi.post(BASE_URL, { username, email, password, admin });
 };
 
-export const update = async ({ id, username, email }) => {
-    try {
-        return await axios.put(`${BASE_URL}/${id}`, {
-            username,
-            email,
-        });
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+export const update = async ({ id, username, email, admin }) => {
+    return await usersApi.put(`${BASE_URL}/${id}`, {
+        username,
+        email,
+        admin,
+    });
 };
 
 export const remove = async (id) => {
-    try {
-        return await axios.delete(`${BASE_URL}/${id}`);
-    } catch (error) {
-        console.error(error);
-    }
+    return await usersApi.delete(`${BASE_URL}/${id}`);
 };
