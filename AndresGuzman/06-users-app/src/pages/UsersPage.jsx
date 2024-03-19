@@ -6,13 +6,21 @@ import { useUsers } from '../hooks/useUsers';
 import { useAuth } from '../auth/hooks/useAuth';
 
 export const UsersPage = () => {
-    const { users, visibleForm, handlerOpenForm, getUsers } = useUsers();
+    const { users, visibleForm, isLoading, handlerOpenForm, getUsers } = useUsers();
 
     const { login } = useAuth();
 
     useEffect(() => {
         getUsers();
     }, []);
+
+    if (isLoading) {
+        return (
+            <div className="container my-2">
+                <h4 className="alert">Cargando...</h4>
+            </div>
+        );
+    }
 
     return (
         <>
