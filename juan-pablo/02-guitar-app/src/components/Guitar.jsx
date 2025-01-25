@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Guitar = ({ guitar, addToCart }) => {
-    const { id, name, price, description, image } = guitar;
+    const { name, price, description, image } = guitar;
 
     return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -38,6 +38,7 @@ Guitar.propTypes = {
         description: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
     }).isRequired,
+    addToCart: PropTypes.func.isRequired,
 };
 
 export default Guitar;
