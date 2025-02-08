@@ -21,3 +21,16 @@ button:nth-last-child(1) {
     background: tomato;
     color: white;
 }
+
+.App {
+    width: 70%;
+    margin-inline: auto;
+    padding: 2rem;
+    margin-top: 50px;
+    box-shadow: 1px 1px 20px 1px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    opacity: 0.8;
+}
