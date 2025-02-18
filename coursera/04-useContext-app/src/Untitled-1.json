@@ -1,0 +1,55 @@
+{
+	"policy": {
+		"id": "VrXel6ETFTdpIwipY40VvQ",
+		"certificateNumber": "2"
+	},
+	"requestType": {
+		"id": "NEW",
+		"lossDetail": {
+			"vehicle": {
+				"licensePlate": "ABC1234",
+				"brand": {
+					"id": "165",
+					"name": "VOLKSWAGEN"
+				},
+				"subBrand": {
+					"id": "22",
+					"name": "JETTA"
+				},
+				"vehicleType": {
+					"id": "724OBA",
+					"name": "VOLKSWAGEN JETTA 2.0L AA EE CD BA TIPTRONIC SEDAN 4 CIL 4 P 5 OCUP"
+				}
+			},
+			"addresses": [
+				{
+					"location": {
+						"addressComponents": [
+							{
+								"name": "Aquiles Serdán 111, Malacates, Gustavo A. Madero, 07119 Ciudad de México, CDMX, México",
+								"componentTypes": [
+									"FULL_ADDRESS"
+								],
+								"code": "MX"
+							}
+						]
+					}
+				}
+			],
+			"geolocation": {
+				"latitude": "19.5725843",
+				"longitude": "-99.1308914"
+			},
+			"quiz": {
+				"isInjured": false,
+				"isCanTransit": true
+			},
+			"serviceSpecificLosses": [
+				{
+					"id": "SHOCK",
+					"eventType": "CLAIMS"
+				}
+			]
+		}
+	}
+}
