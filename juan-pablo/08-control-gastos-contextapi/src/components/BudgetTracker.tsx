@@ -2,6 +2,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useBudget } from '../hooks/useBudget';
 import { AmountDisplay } from './AmountDisplay';
 import 'react-circular-progressbar/dist/styles.css';
+import { ExpensesPieChart } from './ExpensesPieChart';
 
 export const BudgetTracker = () => {
     const { dispatch, state, totalExpenses, remainingBudget } = useBudget();
@@ -11,7 +12,7 @@ export const BudgetTracker = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="flex justify-center">
-                <CircularProgressbar
+                <CircularProgressbar 
                     value={percentage}
                     styles={buildStyles({
                         pathColor: percentage === 100 ? '#DC2626' : '#3B82F6',
@@ -35,6 +36,11 @@ export const BudgetTracker = () => {
                 <AmountDisplay label="Presupuesto" amount={state.budget} />
                 <AmountDisplay label="Disponible" amount={remainingBudget} />
                 <AmountDisplay label="Gastado" amount={totalExpenses} />
+            </div>
+
+            {/* Agrega la gráfica de pastel */}
+            <div className="col-span-1 md:col-span-2">
+                <ExpensesPieChart />
             </div>
         </div>
     );

@@ -43,6 +43,7 @@ export const ExpenseForm = () => {
     };
 
     const handleChangeDate = (value: Value) => {
+        console.log(value);
         setExpense({
             ...expense,
             date: value as Date,
