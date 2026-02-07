@@ -85,6 +85,11 @@ export const Header = () => {
                         >
                             Favoritos
                         </NavLink>
+                        <NavLink to={'/generate'}
+                            className={({ isActive }) => 
+                                `text-${isActive ? 'orange-500' : 'white'} uppercase font-bold`
+                            }
+                            >Generar IA</NavLink>
                     </nav>
                 </div>
 
